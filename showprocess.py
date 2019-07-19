@@ -4,7 +4,7 @@
 # Program for showing the hierarchy of processes on a Linux computer
 # Usage: python <program name>
 ############################
-import sys,re,shlex,subprocess
+import sys,re,shlex,subprocess,pprint
 
 ############### sub declarations come here ######################
 
@@ -27,25 +27,27 @@ def get_indexes(headers):
     index = 0
 
     for header in headers:
-       
-        header.lower()
+               
+        header = header.lower()
         if re.match("^pid$",header):
-            indexes[pid] = index
+            indexes['pid'] = index
         elif re.match("^ppid$", header):
-            indexes[ppid] = index
+            indexes['ppid'] = index
         elif re.match("^command$", header):
-            indexes[command] = index
+            indexes['command'] = index
         index += 1
 
     return indexes
     
-def extract_row_data(row_indexes, processes, split_length):
+def extract_row_data(row_indexes, processes):
 
     process_info = []
 
     for row in processes:
         row = row.rstrip()
-        row_values = row.split(r'\s+', split_length)
+        row_values = row.split()
+        if len(row_values) <= 2:
+            continue
 
         pid     = row_values[ row_indexes['pid'] ];
         ppid    = row_values[ row_indexes['ppid'] ];
@@ -87,14 +89,15 @@ def build_process_trees(processes):
         elif ppid in seen_ppids:
             new_process = {'pid':pid,'command':command}
             if ppid in trees:
-                tress[pid].append(new_process)
+                trees[ppid].append([new_process])
             else:
                 for root in trees:
                     for node in trees[root]:
+                        # node should be an array holding a dict
                         counter = 0
                         for process in node:
                             counter += 1
-                            process_pid = process["pid"]
+                            process_pid = process['pid']
                             if ppid == process_pid:
                              # https://stackoverflow.com/questions/509211/understanding-slice-notation
                              # Success. We found the parent of the child process
@@ -106,7 +109,7 @@ def build_process_trees(processes):
     # End of for loop
     return trees
 
-def format_line(pid,command,counter,pipeline):
+def format_line(pid,command,counter=None,pipeline=None):
 
     pid_length  = len(pid)
     num         = 5 - pid_length
@@ -116,7 +119,7 @@ def format_line(pid,command,counter,pipeline):
 
     formatted_command = "  {0}".format(command)
 
-    if counter or pipeline:
+    if None not in (counter,pipeline):
 
         # 3 spaces is the min
         num = 3;
@@ -192,13 +195,11 @@ if not process_rows:
 all_headers = column_header.split()
 row_indexes = get_indexes(all_headers)
 
-print all_headers
-print row_indexes
 if len(row_indexes) != 3:
     sys.exit("Unable to find the right headers (PID PPID COMMAND) with process command")
 
 # Next, using the indexes, extract the row data for each process
-process_info = extract_row_data( row_indexes, process_rows, len(all_headers) )
+process_info = extract_row_data( row_indexes, process_rows )
 
 # We have all the essential information that we need. Time to build the process trees.
 #################################################################
