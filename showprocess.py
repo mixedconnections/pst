@@ -17,7 +17,7 @@ def get_processes(sys_command):
     except subprocess.CalledProcessError as e:
         sys.exit("Unexpected error: " + e.output)
 
-    lines = output.split('\n')
+    lines = output.decode().split('\n')
 
     return lines[0], lines[1:]
 
@@ -141,7 +141,7 @@ def format_line(pid,command,counter=None,pipeline=None):
 def print_process_trees(processes, trees):
 
     # Print the header
-    print format_line( 'PID', 'COMMAND' )
+    print(format_line( 'PID', 'COMMAND' ))
 
     for row in processes:
 
@@ -152,7 +152,7 @@ def print_process_trees(processes, trees):
         # Parent always comes before child
         if pid in trees:
 
-            print format_line( pid, command )
+            print(format_line( pid, command ))
 
             num_children = len(trees[pid]) 
 
@@ -177,8 +177,8 @@ def print_process_trees(processes, trees):
                     stored_pid     = process['pid']
                     stored_command = process['command']
 
-                    print format_line( stored_pid, stored_command, counter,
-                        pipe_line )
+                    print(format_line( stored_pid, stored_command, counter,
+                        pipe_line ))
 
                     counter+=1
 
