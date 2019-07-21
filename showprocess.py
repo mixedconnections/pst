@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# showprocess.py
+# showprocess.py, copyright, Mike Accardo
 #
 # Program for showing the hierarchy of processes on a Linux computer
 # Usage: python <program name>
