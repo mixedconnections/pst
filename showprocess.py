@@ -136,7 +136,7 @@ def format_line(pid,command,counter=None,pipeline=None):
         formatted_command = "{0}\_ {1}".format(command_padding, command)
     
 
-    return formatted_pid + formatted_command + "\n"
+    return formatted_pid + formatted_command
 
 def print_process_trees(processes, trees):
 
