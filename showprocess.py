@@ -12,7 +12,6 @@ __license__ = "MIT"
 import trees as tr 
 
 sys_command = 'ps -e l'
-
 column_header, process_rows  = tr.get_processes(sys_command)
 
 # Find the index of the processes that we are interested in (PID,PPID,COMMAND)
@@ -24,5 +23,4 @@ process_info = tr.extract_row_data( row_indexes, process_rows )
 
 # We have all the essential information that we need. Time to build the process trees.
 process_tree = tr.build_process_trees( process_info )
-
 tr.print_process_trees( process_info, process_tree )
