@@ -1,6 +1,6 @@
 # <font size =5 color=green> **ShowProcess** </font>
 
-**ShowProcess** is a command-line program that creates visual trees of your system processes. Works best on Unix-like systems. 
+**ShowProcess** is a command-line utility that creates visual trees of your system processes. Works best on Unix-like systems. 
 
 ## Usage
 
