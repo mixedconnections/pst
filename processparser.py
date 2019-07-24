@@ -54,7 +54,7 @@ def get_heading_indexes(column_header):
     indexes = {}
     index = 0
 
-    for heading in column_header:
+    for heading in column_header.split():
                
         heading = heading.lower()
         if re.match("^pid$",heading):
@@ -90,9 +90,9 @@ def get_process_data(indexes, processes):
         if len(process_values) <= 2:
             continue
 
-        pid     = process_values[ indexes['pid'] ];
-        ppid    = process_values[ indexes['ppid'] ];
-        command = process_values[ indexes['command'] ];
+        pid     = process_values[ indexes['pid'] ]
+        ppid    = process_values[ indexes['ppid'] ]
+        command = process_values[ indexes['command'] ]
 
         process_data.append({ 'pid':pid,'ppid':ppid,'command':command})
 
