@@ -9,7 +9,7 @@ __license__ = "MIT"
 # imports
 import sys,re,shlex,subprocess
 
-def get_processes(ps_command):
+def get_ps_output(ps_command):
     """ Gets the output from the process status command.
 
     Args:
@@ -20,7 +20,7 @@ def get_processes(ps_command):
         processes: array of the currently-running processes
     """
 
-    sys_command = shlex.split(ps_command)
+    ps_command = shlex.split(ps_command)
 
     try:
         output = subprocess.check_output(ps_command)
@@ -37,14 +37,18 @@ def get_processes(ps_command):
 
     return column_header, processes
 
-def get_indexes(column_header):
+def get_heading_indexes(column_header):
     """ Gets the position (indexes) of the PID, PPID, and COMMAND headings in the column header.
+
+        PID: Process ID number
+        PPID: ID number of the process's parent process
+        COMMAND: Name of the process, including arguments, if any
 
     Args:
         column_header: the column header from the ps command output
 
     Returns:
-        indexes: a dictionary whose keys/values are the PID, PPID, and COMMAND headings and their respective indexes   
+        indexes: dictionary with the indexes of the PID, PPID, and COMMAND headings in the column header
     """
 
     indexes = {}
@@ -66,23 +70,33 @@ def get_indexes(column_header):
 
     return indexes
     
-def extract_row_data(row_indexes, processes):
-    """Extract and label the row data"""
-    process_info = []
+def get_process_data(indexes, processes):
+    """Extract and label the process data from the ps command output.
 
-    for row in processes:
-        row = row.rstrip()
-        row_values = row.split()
-        if len(row_values) <= 2:
+    Args:
+        indexes: dictionary with the indexes of the PID, PPID, and COMMAND headings in the column header
+        processes: array of the currently-running processes
+    
+    Returns:
+        process_data: array of dictionarys where each dict has the process data for the PID, PPID, and COMMAND headings
+
+    """
+
+    process_data = []
+
+    for process in processes:
+        process = process.rstrip()
+        process_values = process.split()
+        if len(process_values) <= 2:
             continue
 
-        pid     = row_values[ row_indexes['pid'] ];
-        ppid    = row_values[ row_indexes['ppid'] ];
-        command = row_values[ row_indexes['command'] ];
+        pid     = process_values[ indexes['pid'] ];
+        ppid    = process_values[ indexes['ppid'] ];
+        command = process_values[ indexes['command'] ];
 
-        process_info.append({ 'pid':pid,'ppid':ppid,'command':command})
+        process_data.append({ 'pid':pid,'ppid':ppid,'command':command})
 
-    return process_info
+    return process_data
 
 def build_process_trees(processes):
     """ 
