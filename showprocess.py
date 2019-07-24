@@ -12,10 +12,10 @@ __license__ = "MIT"
 import processparser as pp 
 
 ps_command = 'ps -e l'
-column_header, processes  = pp.get_processes(ps_command)
+column_header, processes  = pp.get_ps_output(ps_command)
 
 # Find the index of the headings that we are interested in (PID,PPID,COMMAND)
-heading_indexes = pp.get_indexes(column_header)
+heading_indexes = pp.get_heading_indexes(column_header)
 
 # Next, using the indexes, extract the process data 
 process_info = pp.extract_process_data( heading_indexes, processes )
