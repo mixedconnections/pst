@@ -18,7 +18,7 @@ column_header, processes  = pp.get_ps_output(ps_command)
 heading_indexes = pp.get_heading_indexes(column_header)
 
 # Next, using the indexes, extract the process data 
-process_info = pp.extract_process_data( heading_indexes, processes )
+process_info = pp.get_process_data( heading_indexes, processes )
 
 # We have all the essential information that we need. Time to build the process trees.
 process_trees = pp.build_process_trees( process_info )
