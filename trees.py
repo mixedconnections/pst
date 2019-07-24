@@ -1,12 +1,16 @@
-#!/usr/bin/env python
-# trees.py
-#
-# trees module, definitions for showprocess.py
-############################
+"""
+Process parser for currently-running processes
+"""
+
+__author__ = "Mike Accardo"
+__copyright__ = "Copyright 2019, Mike Accardo"
+__license__ = "MIT"
+
+# imports
 import sys,re,shlex,subprocess
 
 def get_processes(sys_command):
-
+    """Return the output from the process status command"""
     sys_command = shlex.split(sys_command)
 
     try:
@@ -23,7 +27,7 @@ def get_processes(sys_command):
     return lines[0], lines[1:]
 
 def get_indexes(headers):
-
+    """Return the indexes of the pid, ppid, and command in the process list"""
     indexes = {}
     index = 0
 
@@ -44,7 +48,7 @@ def get_indexes(headers):
     return indexes
     
 def extract_row_data(row_indexes, processes):
-
+    """Extract and label the row data"""
     process_info = []
 
     for row in processes:
@@ -62,22 +66,22 @@ def extract_row_data(row_indexes, processes):
     return process_info
 
 def build_process_trees(processes):
+    """ 
+    Build a nested dictionary, based on the relationships between processes  
+    Keys are the ids of processes that "may" have children
+    Values are arrays which hold the children (and children of children)
 
-# trees is a dict ( key => value )
-# keys are the ids of processes that "may" have children
-# values are array references which hold the children (and children of children)
-#
-# Empty arrays indicate that the process has no children
-#
-# Children processes are a hash 
-# [ { 'pid' => $pid, 'command' => $command } ]
-#
-# These structures are pushed to the values (arrays)
-# So values can be arrays of arrays of hashes
-#
-# The multi-levelness is needed to indicate parentage
-# Children of child processes have their hash appended to the hash of their nearest parent
+    Empty arrays indicate that the process has no children
 
+    Children processes are a dict 
+    [ { 'pid' => $pid, 'command' => $command } ]
+
+    These structures are pushed to the values (arrays)
+    So values can be arrays of arrays of dicts
+
+    The multi-levelness is needed to indicate parentage
+    Children of child processes have their dict appended to the dict of their nearest parent
+    """
     trees, seen_ppids = {},{}
 
     for row in processes:
@@ -114,7 +118,7 @@ def build_process_trees(processes):
     return trees
 
 def format_line(pid,command,counter=None,pipeline=None):
-
+    """Add the correct spacing and pipes to processes"""
     pid_length  = len(pid)
     num         = 5 - pid_length
     pid_padding = " " * num
@@ -143,7 +147,7 @@ def format_line(pid,command,counter=None,pipeline=None):
     return formatted_pid + formatted_command
 
 def print_process_trees(processes, trees):
-
+    """ Display the process trees """
     # Print the header
     print(format_line( 'PID', 'COMMAND' ))
 
@@ -162,17 +166,17 @@ def print_process_trees(processes, trees):
 
             for child in trees[pid]:
 
-                # child is an array ref that will contain one or more hash refs
-                # The hash refs hold the process info (pid,command)
-                # Each hash ref is a child of the one before it
+                # child is an array that will contain one or more dicts
+                # The dicts hold the process info (pid,command)
+                # Each dict is a child of the one before it
 
                 counter = 0
                 num_children-=1
                 for process in child:
 
-# IF counter is one here (meaning that the array ref has more than one hash ref)
-# AND there is another array ref (sibling of the parent process) behind us
-# THEN we need to draw a pipe to indicate the relationship to the parent
+                # IF counter is one here (meaning that the array has more than one dict)
+                # AND there is another array (sibling of the parent process) behind us
+                # THEN we need to draw a pipe to indicate the relationship to the parent
 
                     pipe_line = 0
                     if counter >= 1 and num_children >= 1:
