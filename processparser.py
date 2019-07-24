@@ -100,20 +100,18 @@ def get_process_data(indexes, processes):
 
 def build_process_trees(processes):
     """ 
-    Build a nested dictionary, based on the relationships between processes  
-    Keys are the ids of processes that "may" have children
+    Build a nested dictionary, based on the relationships between processes.
+
+    Args:
+        processes: array of the currently-running processes
+
+    Returns:
+        trees: a multi-level dictionary. 
+
+    The keys are the ids of processes that "may" have children
     Values are arrays which hold the children (and children of children)
 
     Empty arrays indicate that the process has no children
-
-    Children processes are a dict 
-    [ { 'pid' => $pid, 'command' => $command } ]
-
-    These structures are pushed to the values (arrays)
-    So values can be arrays of arrays of dicts
-
-    The multi-levelness is needed to indicate parentage
-    Children of child processes have their dict appended to the dict of their nearest parent
     """
     trees, seen_ppids = {},{}
 
@@ -140,12 +138,11 @@ def build_process_trees(processes):
                             counter += 1
                             process_pid = process['pid']
                             if ppid == process_pid:
-                             # https://stackoverflow.com/questions/509211/understanding-slice-notation
                              # Success. We found the parent of the child process
                              # Append child to parent to indicate relatioship
                                 node[counter:0] = [new_process]                        
         else: 
-            # Most likely a zombie
+            # Most likely a zombie process
             trees[pid] = []
     # End of for loop
     return trees
@@ -176,11 +173,10 @@ def format_line(pid,command,counter=None,pipeline=None):
 
         formatted_command = "{0}\_ {1}".format(command_padding, command)
     
-
     return formatted_pid + formatted_command
 
-def print_process_trees(processes, trees):
-    """ Display the process trees """
+def display_process_trees(processes, trees):
+    """ Print the process trees """
     # Print the header
     print(format_line( 'PID', 'COMMAND' ))
 
