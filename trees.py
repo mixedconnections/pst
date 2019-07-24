@@ -17,7 +17,7 @@ def get_processes(ps_command):
 
     Returns:
         column_header: string of column headings above the processes 
-        processes: array containing the currently-running processes
+        processes: array of the currently-running processes
     """
 
     sys_command = shlex.split(ps_command)
@@ -37,33 +37,32 @@ def get_processes(ps_command):
 
     return column_header, processes
 
-def get_indexes(headers):
-    """ Gets the position (indexes) of the pid, ppid, and command in the column header.
+def get_indexes(column_header):
+    """ Gets the position (indexes) of the PID, PPID, and COMMAND headings in the column header.
 
     Args:
-        headers: the column headers from the ps command
+        column_header: the column header from the ps command output
 
     Returns:
-        A dictionary with three key/value pairs. 
-
+        indexes: a dictionary whose keys/values are the PID, PPID, and COMMAND headings and their respective indexes   
     """
 
     indexes = {}
     index = 0
 
-    for header in headers:
+    for heading in column_header:
                
-        header = header.lower()
-        if re.match("^pid$",header):
+        heading = heading.lower()
+        if re.match("^pid$",heading):
             indexes['pid'] = index
-        elif re.match("^ppid$", header):
+        elif re.match("^ppid$", heading):
             indexes['ppid'] = index
-        elif re.match("^command$", header):
+        elif re.match("^command$", heading):
             indexes['command'] = index
         index += 1
 
     if len(indexes) != 3:
-        sys.exit("Unable to find the right headers (PID PPID COMMAND) with the process status command")
+        sys.exit("Unable to find the right headings (PID PPID COMMAND) with the ps command")
 
     return indexes
     
