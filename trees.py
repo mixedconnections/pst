@@ -9,25 +9,45 @@ __license__ = "MIT"
 # imports
 import sys,re,shlex,subprocess
 
-def get_processes(sys_command):
-    """Return the output from the process status command"""
-    sys_command = shlex.split(sys_command)
+def get_processes(ps_command):
+    """ Gets the output from the process status command.
+
+    Args:
+        ps_command: the ps command that displays the currently-running processes
+
+    Returns:
+        column_header: string of column headings above the processes 
+        processes: array containing the currently-running processes
+    """
+
+    sys_command = shlex.split(ps_command)
 
     try:
-        output = subprocess.check_output(sys_command)
+        output = subprocess.check_output(ps_command)
     except subprocess.CalledProcessError as e:
         sys.exit("Unexpected error: " + e.output)
 
     lines = output.decode().split('\n')
+    column_header = lines[0]
+    processes = lines[1:]
 
     # Are there processes? We should never exit here.
-    if not lines:
+    if not processes:
         sys.exit("There are no processes available")
 
-    return lines[0], lines[1:]
+    return column_header, processes
 
 def get_indexes(headers):
-    """Return the indexes of the pid, ppid, and command in the process list"""
+    """ Gets the position (indexes) of the pid, ppid, and command in the column header.
+
+    Args:
+        headers: the column headers from the ps command
+
+    Returns:
+        A dictionary with three key/value pairs. 
+
+    """
+
     indexes = {}
     index = 0
 
@@ -43,7 +63,7 @@ def get_indexes(headers):
         index += 1
 
     if len(indexes) != 3:
-        sys.exit("Unable to find the right headers (PID PPID COMMAND) with process command")
+        sys.exit("Unable to find the right headers (PID PPID COMMAND) with the process status command")
 
     return indexes
     
