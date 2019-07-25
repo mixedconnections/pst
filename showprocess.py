@@ -10,13 +10,14 @@ __license__ = "MIT"
 
 # imports
 import sys
+import pprint
 import argparse
 import processparser as pp 
 
 def my_parse_args():
     parser = argparse.ArgumentParser(description='Show the hierarchy of processes on a Linux computer.')
     parser.add_argument("-o", "--output", action='store',
-                     type=argparse.FileType('w'), dest='output', 
+                     type=str, dest='output', 
                      help="Directs the output to a file name of your choice")
     parser.add_argument("-c", "--command", action='store',
                      type=str, dest='command', 
@@ -38,11 +39,16 @@ def main(args):
     # We have all the essential information that we need. Time to build the process trees.
     process_trees = pp.build_process_trees( process_info )
 
+    tree_output = pp.format_process_trees( process_info, process_trees )
+
+    #pprint.pprint(args['output'])
+
     if args['output']:
         with open(args['output'], 'w') as f:
             sys.stdout = f
-
-    pp.display_process_trees( process_info, process_trees )
+            sys.stdout.write(tree_output)
+    else:
+            sys.stdout.write(tree_output)
 
 if __name__ == '__main__':
     args = my_parse_args()
