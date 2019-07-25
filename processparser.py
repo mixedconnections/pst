@@ -173,12 +173,13 @@ def format_line(pid,command,counter=None,pipeline=None):
 
         formatted_command = "{0}\_ {1}".format(command_padding, command)
     
-    return formatted_pid + formatted_command
+    return formatted_pid + formatted_command + "\n" 
 
-def display_process_trees(processes, trees):
-    """ Print the process trees """
-    # Print the header
-    print(format_line( 'PID', 'COMMAND' ))
+
+def format_process_trees(processes, trees):
+    """ Format the process trees """
+    
+    tree_text = format_line( 'PID', 'COMMAND' )
 
     for row in processes:
 
@@ -189,7 +190,7 @@ def display_process_trees(processes, trees):
         # Parent always comes before child
         if pid in trees:
 
-            print(format_line( pid, command ))
+            tree_text += format_line( pid, command )
 
             num_children = len(trees[pid]) 
 
@@ -214,7 +215,8 @@ def display_process_trees(processes, trees):
                     stored_pid     = process['pid']
                     stored_command = process['command']
 
-                    print(format_line( stored_pid, stored_command, counter,
-                        pipe_line ))
+                    tree_text += format_line( stored_pid, stored_command, counter,
+                        pipe_line )
 
                     counter+=1
+    return tree_text
