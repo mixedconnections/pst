@@ -38,7 +38,7 @@ def get_ps_output(ps_command):
     return column_header, processes
 
 def get_heading_indexes(column_header):
-    """ Gets the position (indexes) of the PID, PPID, and COMMAND headings in the column header.
+    """ Gets the position (indexes) of the PID, PPID, and COMMAND|CMD headings in the column header.
 
         PID: Process ID number
         PPID: ID number of the process's parent process
@@ -48,7 +48,7 @@ def get_heading_indexes(column_header):
         column_header: the column header from the ps command output
 
     Returns:
-        indexes: dictionary with the indexes of the PID, PPID, and COMMAND headings in the column header
+        indexes: dictionary with the indexes of the PID, PPID, and COMMAND|CMD headings in the column header
     """
 
     indexes = {}
