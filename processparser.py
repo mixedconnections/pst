@@ -61,12 +61,14 @@ def get_heading_indexes(column_header):
             indexes['pid'] = index
         elif re.match("^ppid$", heading):
             indexes['ppid'] = index
-        elif re.match("^command$", heading):
+        elif re.match("^(command|cmd)$", heading):
             indexes['command'] = index
         index += 1
 
     if len(indexes) != 3:
-        sys.exit("Unable to find the right headings (PID PPID COMMAND) with the ps command")
+        print "Unable to find the required headings (PID PPID COMMAND|CMD) with the ps command"
+        print "Column header: " + column_header
+        sys.exit()
 
     return indexes
     
