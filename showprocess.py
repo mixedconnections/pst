@@ -10,18 +10,26 @@ __license__ = "MIT"
 
 # imports
 import sys
-import pprint
+import subprocess
 import argparse
 import processparser as pp 
 
+def less(data):
+    process = subprocess.Popen(["less"], stdin=subprocess.PIPE)
+
+    try:
+        process.stdin.write(data)
+        process.communicate()
+    except IOError as e:
+        pass
+
 def my_parse_args():
     parser = argparse.ArgumentParser(description='Show the hierarchy of processes on a Linux computer.')
-    parser.add_argument("-o", "--output", action='store',
-                     type=str, dest='output', 
-                     help="Directs the output to a file name of your choice")
-    parser.add_argument("-c", "--command", action='store',
-                     type=str, dest='command', 
-                     help="Use custom ps command")
+    parser.add_argument("-o", "--output", action='store', 
+                        type=str, dest='output', help="Directs the output to a file name of your choice")
+    parser.add_argument("-c", "--command", action='store', 
+                        type=str, dest='command', help="Use custom ps command")
+    parser.add_argument("-w", "--write", action='store_true', dest='stdout', help="Write to stdout")
     args = vars(parser.parse_args())
     return args
 
@@ -41,14 +49,14 @@ def main(args):
 
     tree_output = pp.format_process_trees( process_info, process_trees )
 
-    #pprint.pprint(args['output'])
-
     if args['output']:
         with open(args['output'], 'w') as f:
             sys.stdout = f
             sys.stdout.write(tree_output)
-    else:
+    elif args['stdout']:
             sys.stdout.write(tree_output)
+    else:
+            less(tree_output)
 
 if __name__ == '__main__':
     args = my_parse_args()
