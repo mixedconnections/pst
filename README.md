@@ -1,6 +1,10 @@
-# <font size =5 color=green> **ShowProcess** </font>
+# <font size =5 color=green>**pst**</font>
 
-**ShowProcess** is a command-line utility that creates visual trees of your system processes. Works best on Unix-like systems. 
+**pst** is a command-line utility that creates visual trees of your running processes. Works best on Unix-like systems. 
+
+**pst** is a light-weight version of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python. 
+
+
 
 ## Usage
 
