@@ -8,9 +8,9 @@
 
 ## Usage
 
-    shell>
-    shell> python showprocess.py
+    shell> 
+    shell> pst
+    shell> pst --help
+    shell> pst -o trees.txt
 
-There are no command-line options. 
-
-Python 2.7, 3.4, 3.5, 3.6, & 3.7 are supported.
+Python 2 & 3 are supported.
