@@ -6,18 +6,18 @@
 
 ## Installation
 
-percol currently supports only Python 2.x.
+pst currently supports Python 2.x-3.x.
 
 ### PyPI
 
-    $ sudo pip install percol
+    $ sudo pip install pst
 
 ### Manual
 
-First, clone percol repository and go into the directory.
+First, clone pst repository and go into the directory.
 
-    $ git clone git://github.com/mooz/percol.git
-    $ cd percol
+    $ git clone git://github.com/mixedconnections/pst.git
+    $ cd pst
 
 Then, run a command below.
 
