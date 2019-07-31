@@ -9,4 +9,4 @@ and you can display the output of your running processes as a tree.
 
 Full details at https://github.com/mixedconnections/pst"""
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
