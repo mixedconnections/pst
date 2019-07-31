@@ -23,7 +23,7 @@ Then, run a command below.
 
     $ sudo python setup.py install
 
-If you don't have a root permission (or don't wanna install percol with sudo), try next one.
+If you don't have a root permission (or don't wanna install pst with sudo), try next one.
 
     $ python setup.py install --prefix=~/.local
     $ export PATH=~/.local/bin:$PATH
