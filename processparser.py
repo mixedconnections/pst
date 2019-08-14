@@ -71,8 +71,8 @@ def get_heading_indexes(column_header):
         index += 1
 
     if len(indexes) != 3:
-        print "Unable to find the required headings (PID PPID COMMAND|CMD) with the ps command"
-        print "Column header: " + column_header
+        print("Unable to find the required headings (PID PPID COMMAND|CMD) with the ps command")
+        print("Column header: " + column_header)
         sys.exit()
 
     return indexes
