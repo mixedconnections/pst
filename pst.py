@@ -20,7 +20,7 @@ def less(data):
     process = subprocess.Popen(["less"], stdin=subprocess.PIPE)
 
     try:
-        process.stdin.write(data)
+        process.stdin.write(data.encode('utf-8'))
         process.communicate()
     except IOError as e:
         pass
