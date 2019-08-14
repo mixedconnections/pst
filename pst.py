@@ -22,8 +22,10 @@ def less(data):
     try:
         process.stdin.write(data.encode('utf-8'))
         process.communicate()
-    except IOError as e:
-        pass
+    except Exception as e:
+        process.terminate()
+        print("Error caught: " + str(e))
+        sys.exit(0)
 
 
 def my_parse_args():
