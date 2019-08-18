@@ -10,6 +10,7 @@ __license__ = "MIT"
 
 
 # imports
+import traceback
 import sys
 import subprocess
 import argparse
@@ -24,7 +25,7 @@ def less(data):
         process.communicate()
     except Exception as e:
         process.terminate()
-        print("Error caught: " + str(e))
+        print(traceback.format_exc())
         sys.exit(0)
 
 
