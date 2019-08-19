@@ -23,7 +23,7 @@ def less(data):
     try:
         process.stdin.write(data.encode('utf-8'))
         process.communicate()
-    except Exception as e:
+    except Exception:
         process.terminate()
         print(traceback.format_exc())
         sys.exit(0)
