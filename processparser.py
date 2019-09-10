@@ -142,9 +142,7 @@ def build_process_trees(processes):
                 for root in trees:
                     for node in trees[root]:
                         # node should be an array holding a dict
-                        counter = 0
-                        for process in node:
-                            counter += 1
+                        for counter, process in enumerate(node, start=1):
                             process_pid = process['pid']
                             if ppid == process_pid:
                              # Success. We found the parent of the child process
