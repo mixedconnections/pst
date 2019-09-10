@@ -194,7 +194,6 @@ def format_process_trees(processes, trees):
     for row in processes:
 
         pid = row['pid']
-        ppid = row['ppid']
         command = row['command']
 
         # Parent always comes before child
@@ -210,9 +209,8 @@ def format_process_trees(processes, trees):
                 # The dicts hold the process info (pid,command)
                 # Each dict is a child of the one before it
 
-                counter = 0
                 num_children -= 1
-                for process in child:
+                for counter, process in enumerate(child):
 
                     # IF counter is one here (meaning that the array has more than one dict)
                     # AND there is another array (sibling of the parent process) behind us
@@ -228,6 +226,4 @@ def format_process_trees(processes, trees):
 
                     tree_text += format_line(stored_pid,
                                              stored_command, counter, pipe_line)
-
-                    counter += 1
     return tree_text
