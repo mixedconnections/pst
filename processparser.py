@@ -132,9 +132,10 @@ def build_process_trees(processes):
 
         seen_ppids[pid] = 1
 
-        if ppid == 0:
+        if ppid == 0 or ppid not in seen_ppids:
             trees[pid] = []
-        elif ppid in seen_ppids:
+        else:
+            # Describe the child and find its parent process (ppid) 
             new_process = {'pid': pid, 'command': command}
             if ppid in trees:
                 trees[ppid].append([new_process])
@@ -146,11 +147,8 @@ def build_process_trees(processes):
                             process_pid = process['pid']
                             if ppid == process_pid:
                              # Success. We found the parent of the child process
-                             # Append child to parent to indicate relatioship
+                             # Append child to parent to indicate relationship
                                 node[counter:0] = [new_process]
-        else:
-            # Most likely a zombie process
-            trees[pid] = []
     # End of for loop
     return trees
 
