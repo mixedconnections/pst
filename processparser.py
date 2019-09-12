@@ -137,15 +137,14 @@ def build_process_trees(processes):
         else:
             # Describe the child and find its parent process (ppid) 
             new_process = {'pid': pid, 'command': command}
-            if ppid in trees:
+            try:
                 trees[ppid].append([new_process])
-            else:
+            except KeyError:
                 for root in trees:
                     for node in trees[root]:
                         # node should be an array holding a dict
                         for counter, process in enumerate(node, start=1):
-                            process_pid = process['pid']
-                            if ppid == process_pid:
+                            if ppid == process['pid']:
                              # Success. We found the parent of the child process
                              # Append child to parent to indicate relationship
                                 node[counter:0] = [new_process]
