@@ -1,20 +1,20 @@
-# <font size =5 color=green>**pst**</font>
+# pst
 
 **pst** is a command-line utility that creates visual trees of your running processes on Unix-like systems. 
 
-**pst** is a light-weight version of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python. 
-
 ![this link](images/pstexample.png)
 
-## Installation
+**pst** is a light-weight version of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python.
+
+### Installation
 
 pst currently supports Python 2.x-3.x.
 
-### PyPI
+#### PyPI
 
     $ sudo pip install pst
 
-### Manual
+#### Manual
 
 First clone the pst repository and go into the directory.
 
@@ -30,7 +30,7 @@ If you don't have root permission (or don't want to install pst with sudo), try:
     $ python setup.py install --prefix=~/.local
     $ export PATH=~/.local/bin:$PATH
 
-## Usage
+### Usage
 
     shell> 
     shell> pst
