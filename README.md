@@ -4,6 +4,8 @@
 
 **pst** is a light-weight version of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python. 
 
+![this link](images/pstexample.png)
+
 ## Installation
 
 pst currently supports Python 2.x-3.x.
