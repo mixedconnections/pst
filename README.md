@@ -1,10 +1,10 @@
 # pst
 
-**pst** is a command-line utility that creates visual trees of your running processes on Unix-like systems. 
+pst is a command-line utility that creates visual trees of your running processes on Unix-like systems. 
 
 ![this link](images/pstexample.png)
 
-**pst** is a light-weight version of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python.
+pst is a light-weight version of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python.
 
 ----
 
