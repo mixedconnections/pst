@@ -4,7 +4,7 @@ pst is a command-line utility that creates visual trees of your running processe
 
 ![this link](images/pstexample.png)
 
-pst is a replica of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python.
+pst is a reproduction of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python.
 
 ----
 
