@@ -12,6 +12,8 @@ pst is a reproduction of [pstree](https://en.wikipedia.org/wiki/Pstree), written
 
 Purely for the fun of it! Feel free to fork and add features.
 
+----
+
 ### Installation
 
 pst currently supports Python 2.x-3.x.
