@@ -11,11 +11,16 @@ __license__ = "MIT"
 
 # imports
 import traceback
+import os
 import sys
 import subprocess
 import argparse
 import processparser as pp
-from pst import __version__
+file_dir = os.path.dirname(os.path.realpath(__file__))
+pst_dir = os.path.join(file_dir, './pst')
+sys.path.insert(0, pst_dir)
+
+from _version import __version__
 
 def less(data):
     process = subprocess.Popen(["less"], stdin=subprocess.PIPE)
