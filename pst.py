@@ -15,7 +15,7 @@ import sys
 import subprocess
 import argparse
 import processparser as pp
-
+from pst import __version__
 
 def less(data):
     process = subprocess.Popen(["less"], stdin=subprocess.PIPE)
@@ -47,6 +47,13 @@ def my_parse_args():
         action='store_true',
         dest='stdout',
         help="Write to stdout")
+    parser.add_argument(
+        "-v",
+        "--version",
+        action='version',
+        version='{version}'.format(version=__version__),
+        dest='stdout',
+        help="Version number of pst")
     args = vars(parser.parse_args())
     return args
 
@@ -82,3 +89,4 @@ def main(args):
 if __name__ == '__main__':
     args = my_parse_args()
     main(args)
+    print(__version__)
