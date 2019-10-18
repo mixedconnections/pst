@@ -89,4 +89,3 @@ def main(args):
 if __name__ == '__main__':
     args = my_parse_args()
     main(args)
-    print(__version__)
