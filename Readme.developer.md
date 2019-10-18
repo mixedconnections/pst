@@ -2,7 +2,7 @@
 
 ## Using Pyinstaller
 
-I've worked on a problem with PyInstaller and the fix for my issue was to remove the __init__.py file from my tree, 
+I've worked on a problem with PyInstaller and the fix for my issue was to remove the `__init__.py` file from my tree, 
 so I don't have that file anymore and everything works as expected. However, now I had to modify sys.path in pst.py inorder to access
 _version.py from incremental.
 
