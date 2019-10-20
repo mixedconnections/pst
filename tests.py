@@ -8,6 +8,9 @@ class PstTestCase(unittest.TestCase):
     def test_installation_file_exists(self):
         self.assertEqual(os.path.exists("pst"),True)
 
+    def test_file_access(self):
+        self.assertEqual(os.access("pst", os.X_OK),True)
+
     def test_help_string(self):
         proc = subprocess.Popen(["pst","-h"], stdout=subprocess.PIPE)
         output = proc.stdout.read()
