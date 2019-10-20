@@ -34,6 +34,10 @@ def less(data):
         sys.exit(0)
 
 
+def find_user(user):
+    pass
+
+
 def my_parse_args():
     parser = argparse.ArgumentParser(
         description='Show the hierarchy of processes on a Linux computer.')
@@ -43,22 +47,29 @@ def my_parse_args():
         action='store',
         type=str,
         dest='output',
-        help="Directs the output to a file name of your choice")
+        help="directs the output to a file name of your choice")
     parser.add_argument("-c", "--command", action='store',
-                        type=str, dest='command', help="Use custom ps command")
+                        type=str, dest='command', help="use custom ps command")
     parser.add_argument(
         "-w",
         "--write",
         action='store_true',
         dest='stdout',
-        help="Write to stdout")
+        help="write to stdout")
     parser.add_argument(
         "-v",
         "--version",
         action='version',
         version='{version}'.format(version=__version__),
         dest='stdout',
-        help="Version number of pst")
+        help="disply version information")
+    parser.add_argument(
+        'USER',
+        type=find_user,
+        help="show only trees rooted at processes of this user",
+        nargs=1,
+        dest='stdout'
+    )
     args = vars(parser.parse_args())
     return args
 
