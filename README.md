@@ -5,7 +5,7 @@
     <img src="https://codecov.io/github/mixedconnections/pst/coverage.svg?branch=master" alt="coverage" />
 </a>
 
-# pst
+# pst: a reproduction of pstree
 
 pst is a command-line utility that creates visual trees of your running processes on Unix-like systems. 
 
