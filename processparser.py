@@ -26,11 +26,12 @@ def get_ps_output(ps_command):
 
     ps_command = shlex.split(ps_command)
 
-    try:
-        output = subprocess.check_output(ps_command)
-    except subprocess.CalledProcessError as e:
-        sys.exit("Unexpected error: " + e.output)
-
+    proc = subprocess.Popen(ps_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    output,error = proc.communicate()
+    if error:
+        errors = error.decode().split('\n')
+        sys.exit(errors[0])
+        
     lines = output.decode().split('\n')
     column_header = lines[0]
     processes = lines[1:]
