@@ -71,6 +71,13 @@ def my_parse_args():
         type=str, 
         dest='user', 
         help="show only trees rooted at processes of this user")
+    parser.add_argument(
+        "-p",
+        "--pid",
+        action='store',
+        type=int, 
+        dest='pid', 
+        help="start at this PID; default is 1 (init)")
     args = vars(parser.parse_args())
     return args
 
@@ -82,6 +89,8 @@ def main(args):
         ps_command = args['command']
     elif args['user']:
         ps_command = 'ps -fu {}'.format(args['user'])
+    elif args['pid']:
+        ps_command = 'ps -p {pid} --ppid {pid} -o pid,ppid,cmd'.format(pid=args['pid'])
 
     column_header, processes = pp.get_ps_output(ps_command)
 
