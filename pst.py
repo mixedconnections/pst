@@ -33,14 +33,6 @@ def less(data):
         print(traceback.format_exc())
         sys.exit(0)
 
-"""
-def find_user(user):
-    if user.isalpha():
-        proc = subprocess.Popen(["id","-u", user], stdout=subprocess.PIPE)
-        output = proc.stdout.read()
-        if not output.isdigit():
-            raise argparse.ArgumentTypeError('No such user name: {}'.format(user))
-"""
 
 def my_parse_args():
     parser = argparse.ArgumentParser(
@@ -52,8 +44,13 @@ def my_parse_args():
         type=str,
         dest='output',
         help="directs the output to a file name of your choice")
-    parser.add_argument("-c", "--command", action='store',
-                        type=str, dest='command', help="use custom ps command")
+    parser.add_argument(
+        "-c", 
+        "--command", 
+        action='store',
+        type=str, 
+        dest='command', 
+        help="use custom ps command")
     parser.add_argument(
         "-w",
         "--write",
@@ -68,20 +65,24 @@ def my_parse_args():
         dest='stdout',
         help="display version information")
     parser.add_argument(
-        'USER',
-        type=str,
+        "-u",
+        "--user",
+        action='store',
+        type=str, 
+        dest='user', 
         help="show only trees rooted at processes of this user")
-    parser.add_argument(
-        'PID',
-        type=int,
-        help="start at this PID; default is 1 (init)")
     args = vars(parser.parse_args())
     return args
 
 
 def main(args):
 
-    ps_command = args['command'] or 'ps -e l'
+    ps_command = 'ps -e l'
+    if args['command']:
+        ps_command = args['command']
+    elif args['user']:
+        ps_command = 'ps -fu {}'.format(args['user'])
+
     column_header, processes = pp.get_ps_output(ps_command)
 
     # Find the index of the headings that we are interested in
