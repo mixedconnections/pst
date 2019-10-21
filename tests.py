@@ -7,6 +7,14 @@ from distutils.spawn import find_executable
 
 class PstTestCase(unittest.TestCase):
     """This class represents the pst test case"""
+    
+    @classmethod
+    def tearDownClass(cls):
+        filePath = "trees.txt"
+        try:
+            os.remove(filePath)
+        except BaseException:
+            print("Error while deleting file ", filePath)
 
     def test_file_exists(self):
         self.assertTrue(find_executable("pst"))
@@ -21,11 +29,25 @@ class PstTestCase(unittest.TestCase):
             os.path.getsize('bin/pst'))
 
     def test_help_string(self):
-        proc = subprocess.Popen(["pst", "-h"], stdout=subprocess.PIPE)
-        output = proc.stdout.read()
+        proc = subprocess.Popen(["pst", "-h"],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        output, error = proc.communicate()
+        if error:
+            self.fail("Failed with %s" % error)
         REGEX = re.compile('usage')
         self.assertTrue(REGEX.search(output))
 
+    def test_user_and_output_file(self):
+        proc = subprocess.Popen(["pst", "-u", "root", "-o", "trees.txt"],
+                                stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        output, error = proc.communicate()
+        if error:
+            self.fail("Failed with %s" % error)
+        self.assertTrue(os.path.isfile("trees.txt"))
+        self.assertTrue(os.path.getsize("trees.txt") > 0)
+    
 
 if __name__ == "__main__":
     unittest.main()
