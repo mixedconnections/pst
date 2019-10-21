@@ -19,8 +19,8 @@ import processparser as pp
 file_dir = os.path.dirname(os.path.realpath(__file__))
 pst_dir = os.path.join(file_dir, './pst')
 sys.path.insert(0, pst_dir)
-
 from _version import __version__
+
 
 def less(data):
     process = subprocess.Popen(["less"], stdin=subprocess.PIPE)
@@ -45,11 +45,11 @@ def my_parse_args():
         dest='output',
         help="directs the output to a file name of your choice")
     parser.add_argument(
-        "-c", 
-        "--command", 
+        "-c",
+        "--command",
         action='store',
-        type=str, 
-        dest='command', 
+        type=str,
+        dest='command',
         help="use custom ps command")
     parser.add_argument(
         "-w",
@@ -68,15 +68,15 @@ def my_parse_args():
         "-u",
         "--user",
         action='store',
-        type=str, 
-        dest='user', 
+        type=str,
+        dest='user',
         help="show only trees rooted at processes of this user")
     parser.add_argument(
         "-p",
         "--pid",
         action='store',
-        type=int, 
-        dest='pid', 
+        type=int,
+        dest='pid',
         help="start at this PID; default is 1 (init)")
     args = vars(parser.parse_args())
     return args
@@ -90,7 +90,8 @@ def main(args):
     elif args['user']:
         ps_command = 'ps -fu {}'.format(args['user'])
     elif args['pid']:
-        ps_command = 'ps -p {pid} --ppid {pid} -o pid,ppid,cmd'.format(pid=args['pid'])
+        ps_command = 'ps -p {pid} --ppid {pid} -o pid,ppid,cmd'.format(
+            pid=args['pid'])
 
     column_header, processes = pp.get_ps_output(ps_command)
 

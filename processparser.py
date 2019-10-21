@@ -26,12 +26,15 @@ def get_ps_output(ps_command):
 
     ps_command = shlex.split(ps_command)
 
-    proc = subprocess.Popen(ps_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    output,error = proc.communicate()
+    proc = subprocess.Popen(
+        ps_command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
+    output, error = proc.communicate()
     if error:
         errors = error.decode().split('\n')
         sys.exit(errors[0])
-        
+
     lines = output.decode().split('\n')
     column_header = lines[0]
     processes = lines[1:]
@@ -136,7 +139,7 @@ def build_process_trees(processes):
         if ppid == 0 or ppid not in seen_ppids:
             trees[pid] = []
         else:
-            # Describe the child and find its parent process (ppid) 
+            # Describe the child and find its parent process (ppid)
             new_process = {'pid': pid, 'command': command}
             try:
                 trees[ppid].append([new_process])
