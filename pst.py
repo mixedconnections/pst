@@ -33,10 +33,14 @@ def less(data):
         print(traceback.format_exc())
         sys.exit(0)
 
-
+"""
 def find_user(user):
-    pass
-
+    if user.isalpha():
+        proc = subprocess.Popen(["id","-u", user], stdout=subprocess.PIPE)
+        output = proc.stdout.read()
+        if not output.isdigit():
+            raise argparse.ArgumentTypeError('No such user name: {}'.format(user))
+"""
 
 def my_parse_args():
     parser = argparse.ArgumentParser(
@@ -62,14 +66,15 @@ def my_parse_args():
         action='version',
         version='{version}'.format(version=__version__),
         dest='stdout',
-        help="disply version information")
+        help="display version information")
     parser.add_argument(
         'USER',
-        type=find_user,
-        help="show only trees rooted at processes of this user",
-        nargs=1,
-        dest='stdout'
-    )
+        type=str,
+        help="show only trees rooted at processes of this user")
+    parser.add_argument(
+        'PID',
+        type=int,
+        help="start at this PID; default is 1 (init)")
     args = vars(parser.parse_args())
     return args
 
