@@ -15,12 +15,6 @@ pst is a reproduction of [pstree](https://en.wikipedia.org/wiki/Pstree), written
 
 ----
 
-### Motivation
-
-Purely for the fun of it! Feel free to fork and add features.
-
-----
-
 ### Installation
 
 pst currently supports Python 2.x-3.x.
@@ -51,4 +45,8 @@ If you don't have root permission (or don't want to install pst with sudo), try:
     shell> pst
     shell> pst --help
     shell> pst -o trees.txt
+    
+ __pst__ shows running processes as a tree.  The tree is rooted at
+ either _pid_ or __init__ if _pid_ is omitted.  If a user name is specified,
+ all process trees rooted at processes owned by that user are shown
 
