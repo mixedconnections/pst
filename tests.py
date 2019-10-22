@@ -1,7 +1,7 @@
 import unittest
-import subprocess
 import os
 import re
+from subprocess import Popen, PIPE
 from distutils.spawn import find_executable
 
 
@@ -29,9 +29,7 @@ class PstTestCase(unittest.TestCase):
             os.path.getsize('bin/pst'))
 
     def test_help_string(self):
-        proc = subprocess.Popen(["pst", "-h"],
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+        proc = Popen(["pst", "-h"], stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
@@ -39,9 +37,7 @@ class PstTestCase(unittest.TestCase):
         self.assertTrue(REGEX.search(output))
 
     def test_user_and_output_file(self):
-        proc = subprocess.Popen(["pst", "-u", "root", "-o", "trees.txt"],
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+        proc = Popen(["pst", "-u", "root", "-o", "trees.txt"], stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
