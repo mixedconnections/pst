@@ -4,10 +4,8 @@ import re
 from subprocess import Popen, PIPE
 from distutils.spawn import find_executable
 
-
 class PstTestCase(unittest.TestCase):
     """This class represents the pst test case"""
-    
     @classmethod
     def tearDownClass(cls):
         filePath = "trees.txt"
@@ -23,7 +21,7 @@ class PstTestCase(unittest.TestCase):
         self.assertEqual(os.access(find_executable("pst"), os.X_OK), True)
 
     def test_compare_file_size(self):
-        self.assertEqual( os.path.getsize( find_executable("pst")), os.path.getsize('bin/pst'))
+        self.assertEqual(os.path.getsize(find_executable("pst")), os.path.getsize('bin/pst'))
 
     def test_help_string(self):
         proc = Popen(["pst", "-h"], stdout=PIPE, stderr=PIPE)
