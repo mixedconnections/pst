@@ -14,7 +14,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/mixedconnections/pst",
     packages=["pst"],
-    data_files=[("/usr/bin",["bin/pst"])],
+    data_files=[("/usr/local/bin",["bin/pst"])],
     use_incremental=True,
     setup_requires=['incremental'],
     classifiers=[
