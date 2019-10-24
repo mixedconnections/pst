@@ -32,7 +32,7 @@ class PstTestCase(unittest.TestCase):
         if error:
             self.fail("Failed with %s" % error)
         REGEX = re.compile('usage')
-        self.assertTrue(REGEX.search(output))
+        self.assertTrue(REGEX.search(output.decode('utf-8')))
 
     def test_user_and_output_file(self):
         proc = Popen(["pst", "-u", "root", "-o", "trees-root.txt"], stdout=PIPE, stderr=PIPE)
