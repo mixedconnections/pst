@@ -49,4 +49,10 @@ If you don't have root permission (or don't want to install pst with sudo), try:
  __pst__ shows running processes as a tree.  The tree is rooted at
  either _pid_ or __init__ if _pid_ is omitted.  If a user name is specified,
  all process trees rooted at processes owned by that user are shown
+ 
+ #### More Examples
+ 
+     shell> pst --user postgres
+     shell> pst --pid 393    
+ 
 
