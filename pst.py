@@ -78,9 +78,7 @@ def my_parse_args():
 def main(args):
 
     ps_command = 'ps -e l'
-    if args['command']:
-        ps_command = args['command']
-    elif args['user']:
+    if args['user']:
         ps_command = 'ps -fu {}'.format(args['user'])
     elif args['pid']:
         ps_command = 'ps -p {pid} --ppid {pid} -o pid,ppid,cmd'.format(
