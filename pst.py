@@ -45,13 +45,6 @@ def my_parse_args():
         dest='output',
         help="directs the output to a file name of your choice")
     parser.add_argument(
-        "-c",
-        "--command",
-        action='store',
-        type=str,
-        dest='command',
-        help="use custom ps command")
-    parser.add_argument(
         "-w",
         "--write",
         action='store_true',
