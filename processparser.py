@@ -95,10 +95,11 @@ def get_process_data(indexes, processes):
     """
 
     process_data = []
+    maxsplit = indexes['command']
 
     for process in processes:
         process = process.rstrip()
-        process_values = process.split()
+        process_values = process.split(None,maxsplit)
         if len(process_values) <= 2:
             continue
 

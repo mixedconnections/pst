@@ -45,13 +45,6 @@ def my_parse_args():
         dest='output',
         help="directs the output to a file name of your choice")
     parser.add_argument(
-        "-c",
-        "--command",
-        action='store',
-        type=str,
-        dest='command',
-        help="use custom ps command")
-    parser.add_argument(
         "-w",
         "--write",
         action='store_true',
@@ -85,9 +78,7 @@ def my_parse_args():
 def main(args):
 
     ps_command = 'ps -e l'
-    if args['command']:
-        ps_command = args['command']
-    elif args['user']:
+    if args['user']:
         ps_command = 'ps -fu {}'.format(args['user'])
     elif args['pid']:
         ps_command = 'ps -p {pid} --ppid {pid} -o pid,ppid,cmd'.format(
