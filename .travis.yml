@@ -10,5 +10,6 @@ install:
   - sudo python setup.py install
 script:
   - coverage run -m unittest discover -s tests/
+  - coverage report --omit=tests/test_binary.py
 after_success:
   - bash <(curl -s https://codecov.io/bash)
