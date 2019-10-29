@@ -1,54 +1,21 @@
 import unittest
-import filecmp
+import sys
 import os
-import re
-from subprocess import Popen, PIPE
+sys.path.append(os.path.join(os.path.dirname(__file__), '..')) 
+import processparser as pp
+
 
 class PstTestCase(unittest.TestCase):
     """This class represents the pst test case"""
 
-    @classmethod
-    def tearDownClass(cls):
-        files = ["trees-root.txt", "trees-pid.txt", "trees-pst.txt"]
-        for f in files:
-	    if os.path.isfile(f):
-                try:
-                    os.remove(f)
-                except BaseException:
-                    print("Error while deleting file ", f)
-
-    def test_file_exists(self):
-        self.assertTrue(os.path.isfile("../pst.py"))
-
-    def test_file_access(self):
-        self.assertEqual(os.access("../pst.py", os.X_OK), True)
-
-    def test_help_string(self):
-        proc = Popen(["../pst.py", "-h"], stdout=PIPE, stderr=PIPE)
-        output, error = proc.communicate()
-        if error:
-            self.fail("Failed with %s" % error)
-        REGEX = re.compile('usage')
-        self.assertTrue(REGEX.search(output.decode('utf-8')))
-
-    def test_user_and_output_file(self):
-        proc = Popen(["../pst.py", "-u", "root", "-o", "trees-root.txt"], stdout=PIPE, stderr=PIPE)
-        output, error = proc.communicate()
-        if error:
-            self.fail("Failed with %s" % error)
-        self.assertTrue(os.path.isfile("trees-root.txt"))
-        self.assertTrue(os.path.getsize("trees-root.txt") > 0)
-    
-    def test_compare_output_file_sizes(self):
-        proc = Popen(["../pst.py", "-p", "1", "-o", "trees-pid.txt"], stdout=PIPE, stderr=PIPE)
-        output, error = proc.communicate()
-        if error:
-            self.fail("Failed with %s" % error)
-        proc = Popen(["../pst.py", "-o", "trees-pst.txt"], stdout=PIPE, stderr=PIPE)
-        output, error = proc.communicate()
-        if error:
-            self.fail("Failed with %s" % error)
-        self.assertTrue(os.path.getsize('trees-pst.txt') > os.path.getsize('trees-pid.txt')) 
+    def test_ps_output(self):
+	ps_command = 'ps -e l'
+	column_header, processes = pp.get_ps_output(ps_command)
+	heading_indexes = pp.get_heading_indexes(column_header)
+	process_info = pp.get_process_data(heading_indexes, processes)
+	process_trees = pp.build_process_trees(process_info)
+	tree_output = pp.format_process_trees(process_info, process_trees)
+	self.assertTrue(len(tree_output) > 0)
 
 if __name__ == "__main__":
     unittest.main(failfast=True)
