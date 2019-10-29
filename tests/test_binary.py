@@ -28,8 +28,7 @@ class PstTestCase(unittest.TestCase):
         self.assertTrue(REGEX.search(output.decode('utf-8')))
 
     def test_user_and_output_file(self):
-        proc = Popen(["pst", "-u", "root", "-o", "trees-root.txt"],
-                     stdout=PIPE, stderr=PIPE)
+        proc = Popen(["pst", "-u", "root", "-o", "trees-root.txt"], stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
@@ -37,8 +36,7 @@ class PstTestCase(unittest.TestCase):
         self.assertTrue(os.path.getsize("trees-root.txt") > 0)
 
     def test_compare_output_file_sizes(self):
-        proc = Popen(["pst", "-p", "1", "-o", "trees-pid.txt"],
-                     stdout=PIPE, stderr=PIPE)
+        proc = Popen(["pst", "-p", "1", "-o", "trees-pid.txt"], stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
@@ -46,8 +44,7 @@ class PstTestCase(unittest.TestCase):
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
-        self.assertTrue(os.path.getsize('trees-pst.txt') >
-                        os.path.getsize('trees-pid.txt'))
+        self.assertTrue(os.path.getsize('trees-pst.txt') > os.path.getsize('trees-pid.txt'))
 
 
 if __name__ == "__main__":
