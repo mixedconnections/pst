@@ -5,6 +5,7 @@ import re
 from subprocess import Popen, PIPE
 from distutils.spawn import find_executable
 
+
 class PstTestCase(unittest.TestCase):
     """This class represents the pst test case"""
 
@@ -12,7 +13,7 @@ class PstTestCase(unittest.TestCase):
     def tearDownClass(cls):
         files = ["trees-root.txt", "trees-pid.txt", "trees-pst.txt"]
         for f in files:
-	    if os.path.isfile(f):
+            if os.path.isfile(f):
                 try:
                     os.remove(f)
                 except BaseException:
@@ -27,15 +28,17 @@ class PstTestCase(unittest.TestCase):
         self.assertTrue(REGEX.search(output.decode('utf-8')))
 
     def test_user_and_output_file(self):
-        proc = Popen(["pst", "-u", "root", "-o", "trees-root.txt"], stdout=PIPE, stderr=PIPE)
+        proc = Popen(["pst", "-u", "root", "-o", "trees-root.txt"],
+                     stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
         self.assertTrue(os.path.isfile("trees-root.txt"))
         self.assertTrue(os.path.getsize("trees-root.txt") > 0)
-    
+
     def test_compare_output_file_sizes(self):
-        proc = Popen(["pst", "-p", "1", "-o", "trees-pid.txt"], stdout=PIPE, stderr=PIPE)
+        proc = Popen(["pst", "-p", "1", "-o", "trees-pid.txt"],
+                     stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
@@ -43,7 +46,9 @@ class PstTestCase(unittest.TestCase):
         output, error = proc.communicate()
         if error:
             self.fail("Failed with %s" % error)
-        self.assertTrue(os.path.getsize('trees-pst.txt') > os.path.getsize('trees-pid.txt')) 
+        self.assertTrue(os.path.getsize('trees-pst.txt') >
+                        os.path.getsize('trees-pid.txt'))
+
 
 if __name__ == "__main__":
     unittest.main(failfast=True)
