@@ -74,7 +74,7 @@ Start at this pid; default is 1 (init)
 ### Demo
 Demos speak more than a thousand words! Here's me running pst on ubuntu. As you can see, you can select a pid and see its child processes:
 
-![this link](images/pstdemo.gif)
+![this link](images/pst-demo.gif)
 
 ### More Examples
 
