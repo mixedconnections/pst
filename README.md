@@ -61,7 +61,7 @@ Directs the output to a file name of your choice
 
 ##### -w, --write
 
-When specified, pst writes to stdout. By default, pst uses less to page the output of the trees. 
+When specified, pst writes to stdout. By default, pst uses less to page the output. 
 
 ##### -u, --user `string`
     
