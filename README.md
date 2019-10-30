@@ -71,7 +71,12 @@ Show only trees rooted at processes of this user
     
 Start at this pid; default is 1 (init)
 
-### Examples
+### Demo
+Demos speak more than a thousand words! Here's me running pst on ubuntu. As you can see, you can select a pid and see its child processes:
+
+![this link](images/pstdemo.gif)
+
+### More Examples
 
     shell> 
     shell> pst
@@ -79,5 +84,3 @@ Start at this pid; default is 1 (init)
     shell> pst -o trees.txt 
     shell> pst --user postgres
     shell> pst --pid 393    
- 
-
