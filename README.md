@@ -41,18 +41,43 @@ If you don't have root permission (or don't want to install pst with sudo), try:
 
 ### Usage
 
-    shell> 
-    shell> pst
-    shell> pst --help
-    shell> pst -o trees.txt
-    
  __pst__ shows running processes as a tree.  The tree is rooted at
  either _pid_ or __init__ if _pid_ is omitted.  If a user name is specified,
  all process trees rooted at processes owned by that user are shown
  
- #### More Examples
- 
-     shell> pst --user postgres
-     shell> pst --pid 393    
+#### Command Line Options
+
+##### -h, --help
+
+Display a help message
+
+##### -v, --version
+
+Display the version of pst
+
+##### -o, --output `string`
+    
+Directs the output to a file name of your choice
+
+##### -w, --write
+
+When specified, pst writes to stdout. By default, pst uses less to page the output of the trees. 
+
+##### -u, --user `string`
+    
+Show only trees rooted at processes of this user
+
+##### -p, --pid `integer`
+    
+Start at this pid; default is 1 (init)
+
+### Examples
+
+    shell> 
+    shell> pst
+    shell> pst --help
+    shell> pst -o trees.txt 
+    shell> pst --user postgres
+    shell> pst --pid 393    
  
 
