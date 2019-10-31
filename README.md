@@ -13,8 +13,6 @@ pst is a command-line utility that creates visual trees of your running processe
 
 pst is a reproduction of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python.
 
-----
-
 # Installation
 
 pst currently supports Python 2.x-3.x.
