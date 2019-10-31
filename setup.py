@@ -6,7 +6,6 @@ exec(open("pst/info.py").read())
 
 setup(
     name="pst",
-    version=__version__,
     author="mixed.connections",
     author_email="mixed.connections2@gmail.com",
     description="A reproduction of pstree",
