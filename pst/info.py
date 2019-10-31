@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__doc__ = """A light-weight version of pstree.
+__doc__ = """A reproduction of pstree.
 Try::
 
     $ pst
@@ -8,5 +8,3 @@ Try::
 and you can display the output of your running processes as a tree.
 
 Full details at https://github.com/mixedconnections/pst"""
-
-__version__ = "0.0.2"
