@@ -15,7 +15,7 @@ pst is a reproduction of [pstree](https://en.wikipedia.org/wiki/Pstree), written
 
 ----
 
-### Installation
+# Installation
 
 pst currently supports Python 2.x-3.x.
 
@@ -39,7 +39,7 @@ If you don't have root permission (or don't want to install pst with sudo), try:
     $ python setup.py install --prefix=~/.local
     $ export PATH=~/.local/bin:$PATH
 
-### Usage
+# Usage
 
  __pst__ shows running processes as a tree.  The tree is rooted at
  either _pid_ or __init__ if _pid_ is omitted.  If a user name is specified,
@@ -71,12 +71,12 @@ Show only trees rooted at processes of this user
     
 Start at this pid; default is 1 (init)
 
-### Demo
+# Demo
 Demos speak more than a thousand words! Here's me running pst on ubuntu. As you can see, you can select a pid and see its child processes:
 
 ![this link](images/pst-demo.gif)
 
-### More Examples
+#### More Examples
 
     shell> 
     shell> pst
