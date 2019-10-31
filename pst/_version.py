@@ -7,5 +7,5 @@ Provides pst version information.
 
 from incremental import Version
 
-__version__ = Version('pst', 19, 10, 0, release_candidate=1)
+__version__ = Version('pst', 1, 5, 0)
 __all__ = ["__version__"]
