@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
-import os
-import sys
 from setuptools import setup
-file_dir = os.path.dirname(os.path.realpath(__file__))
-pst_dir = os.path.join(file_dir, './pst')
-sys.path.insert(0, pst_dir)
-from _version import __version__
+
+_locals = {}
+with open('pst/_version.py') as src:
+    exec(src.read(), None, _locals)
+version = _locals['__version__']
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -14,7 +13,7 @@ with open("README.md", "r") as fh:
 setup(
     name="pst",
     author="mixed.connections",
-    version=__version__,
+    version=version,
     author_email="mixed.connections2@gmail.com",
     description="A reproduction of pstree",
     long_description=long_description,
