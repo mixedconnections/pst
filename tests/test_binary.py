@@ -49,8 +49,8 @@ class PstTestCase(unittest.TestCase):
 
     def test_version_comparison(self):
         proc = Popen(["pst", "-v"], stdout=PIPE, stderr=PIPE)
-        version_bin = proc.communicate()[1]
-        self.assertEqual(version_bin.rstrip(),str(__version__))
+        version_bin = proc.communicate()[1].decode('utf-8').rstrip()
+        self.assertEqual(version_bin,str(__version__))
 
 if __name__ == "__main__":
     unittest.main(failfast=True)
