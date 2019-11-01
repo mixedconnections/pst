@@ -1,10 +1,11 @@
 import unittest
-import filecmp
-import os
 import re
+import os
+import sys
 from subprocess import Popen, PIPE
 from distutils.spawn import find_executable
-
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from pst import __version__
 
 class PstTestCase(unittest.TestCase):
     """This class represents the pst test case"""
@@ -35,7 +36,7 @@ class PstTestCase(unittest.TestCase):
         self.assertTrue(os.path.isfile("trees-root.txt"))
         self.assertTrue(os.path.getsize("trees-root.txt") > 0)
 
-    def test_compare_output_file_sizes(self):
+    def test_file_sizes_comparison(self):
         proc = Popen(["pst", "-p", "1", "-o", "trees-pid.txt"], stdout=PIPE, stderr=PIPE)
         output, error = proc.communicate()
         if error:
@@ -46,6 +47,10 @@ class PstTestCase(unittest.TestCase):
             self.fail("Failed with %s" % error)
         self.assertTrue(os.path.getsize('trees-pst.txt') > os.path.getsize('trees-pid.txt'))
 
+    def test_version_comparison(self):
+        proc = Popen(["pst", "-v"], stdout=PIPE, stderr=PIPE)
+        version_bin = proc.communicate()[1]
+        self.assertEqual(version_bin.rstrip(),str(__version__))
 
 if __name__ == "__main__":
     unittest.main(failfast=True)
