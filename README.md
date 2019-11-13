@@ -7,7 +7,7 @@ pst: a reproduction of pstree
 
 pst is a command-line utility that creates visual trees of your running processes on Unix-like systems. 
 
-![this link](images/pstexample.png)
+![pstexample](https://user-images.githubusercontent.com/833824/68803703-40952580-062e-11ea-9ea6-2a506316cafb.png)
 
 pst is a reproduction of [pstree](https://en.wikipedia.org/wiki/Pstree), written in Python.
 
@@ -70,7 +70,7 @@ Start at this pid; default is 1 (init)
 # Demo
 Demos speak more than a thousand words! Here's me running pst on ubuntu. As you can see, you can select a pid and see its child processes:
 
-![this link](images/pst-demo.gif)
+![pst-demo](https://user-images.githubusercontent.com/833824/68803841-7df9b300-062e-11ea-97bf-0aef1f264abd.gif)
 
 #### More Examples
 
