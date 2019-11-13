@@ -1,11 +1,9 @@
-<a href="https://travis-ci.org/mixedconnections/pst">
-    <img src="https://api.travis-ci.org/mixedconnections/pst.svg?branch=master" alt="travis build status" />
-</a>
-<a href="https://codecov.io/gh/mixedconnections/pst">
-    <img src="https://codecov.io/github/mixedconnections/pst/coverage.svg?branch=master" alt="coverage" />
-</a>
+pst: a reproduction of pstree
+=============================
 
-# pst: a reproduction of pstree
+[![Travis CI](https://api.travis-ci.org/mixedconnections/pst.svg?branch=master)](https://travis-ci.org/mixedconnections/pst) 
+[![Python versions](https://img.shields.io/pypi/v/pst.svg)](https://pypi.org/project/pst/)
+[![Codecov](https://codecov.io/github/mixedconnections/pst/coverage.svg?branch=master)](https://codecov.io/gh/mixedconnections/pst)
 
 pst is a command-line utility that creates visual trees of your running processes on Unix-like systems. 
 
