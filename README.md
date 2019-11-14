@@ -79,4 +79,3 @@ Demos speak more than a thousand words! Here's me running pst on ubuntu. As you 
     shell> pst --help
     shell> pst -o trees.txt 
     shell> pst --user postgres
-    shell> pst --pid 393    
