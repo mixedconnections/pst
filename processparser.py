@@ -99,7 +99,7 @@ def get_process_data(indexes, processes):
 
     for process in processes:
         process = process.rstrip()
-        process_values = process.split(None,maxsplit)
+        process_values = process.split(None, maxsplit)
         if len(process_values) <= 2:
             continue
 
