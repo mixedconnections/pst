@@ -17,7 +17,7 @@ is equivalent.)
 
 `pyinstaller --paths=/path/to/pst --onefile pst.py --name pst`
 
-## PyPi
+## PyPI
 
 `python setup.py sdist`
 
