@@ -23,7 +23,7 @@ pst currently supports Python 2.x-3.x.
 
 First clone the pst repository and go into the directory.
 
-    $ git clone git://github.com/mixedconnections/pst.git
+    $ git clone git://github.com/topunix/pst.git
     $ cd pst
 
 Then run the command below.
