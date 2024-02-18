@@ -1,7 +1,7 @@
 pst: a reproduction of pstree
 =============================
 
-[![Travis CI](https://api.travis-ci.org/mixedconnections/pst.svg?branch=master)](https://travis-ci.org/mixedconnections/pst) 
+
 [![Python versions](https://img.shields.io/pypi/v/pst.svg)](https://pypi.org/project/pst/)
 [![Codecov](https://codecov.io/github/mixedconnections/pst/coverage.svg?branch=master)](https://codecov.io/gh/mixedconnections/pst)
 
